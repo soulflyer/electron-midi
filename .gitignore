@@ -5,3 +5,6 @@
 out
 .DS_Store
 .lein-failures
+.nrepl-port
+package-lock.json
+node_modules/

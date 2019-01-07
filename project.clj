@@ -12,7 +12,8 @@
   :min-lein-version "2.5.3"
   :source-paths ["src/clj" "src/cljs"]
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
-  :figwheel {:css-dirs ["resources/public/css"]}
+  :figwheel {:css-dirs    ["resources/public/css"]
+             :server-port 3434}
   :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
 
   :profiles
@@ -23,24 +24,42 @@
                    [figwheel-sidecar "0.5.18"]
                    [cider/piggieback "0.3.10"]]
 
-    :plugins      [[lein-figwheel "0.5.16"]]}
+    :plugins [[lein-figwheel "0.5.16"]]}
    :prod { :dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]}}
 
   :cljsbuild
   {:builds
    [{:id           "dev"
      :source-paths ["src/cljs"]
+     :incremental  true
+     :assert       true
+     :compiler     {:output-to      ".out/app/electron-host.js"
+                    :output-dir     ".tmp/app"
+                    ;;:asset-path    "js/compiled/out"
+                    :pretty-print   true
+                    :output-wrapper true
+                    :elide-asserts  true
+                    :target         :nodejs
+                    :optimizations  :simple}}
+
+    {:id           "dev-ui"
+     :source-paths ["src-ui/cljs"]
+     :incremental  true
+     :assert       true
      :figwheel     {:on-jsload "electron-midi.core/mount-root"}
      :compiler     {:main                 electron-midi.core
-                    :output-to            "resources/public/js/compiled/app.js"
-                    :output-dir           "resources/public/js/compiled/out"
-                    :asset-path           "js/compiled/out"
-                    :source-map-timestamp true
+                    :output-to            ".out/app/ui.js"
+                    :output-dir           ".out/lib/ui"
+                    :elide-asserts        true
+                    :optimizations        :none
+                    :pretty-print         true
+                    :output-wrapper       true
                     :preloads             [devtools.preload
                                            day8.re-frame-10x.preload]
-                    :closure-defines      {"re_frame.trace.trace_enabled_QMARK_" true
+                    :closure-defines      {"re_frame.trace.trace_enabled_QMARK_"        true
                                            "day8.re_frame.tracing.trace_enabled_QMARK_" true}
-                    :external-config      {:devtools/config {:features-to-install :all}}}}
+                    :external-config      {:devtools/config {:features-to-install :all}}
+                    :source-map-timestamp true}}
 
     {:id           "min"
      :source-paths ["src/cljs"]

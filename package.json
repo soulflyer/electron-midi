@@ -1,0 +1,11 @@
+{
+    "name": "electron-midi",
+    "version": "0.1.0",
+    "description": "electron project without template",
+    "devDependencies": {
+        "electron": "4.0.0",
+        "electron-packager": "^13.0.1"
+    },
+    "license": "MIT",
+    "repository": "https://github.com/soulflyer"
+}
