@@ -2,7 +2,8 @@
 /target
 /*-init.clj
 /resources/public/js/compiled
-out
+.out
+.tmp
 .DS_Store
 .lein-failures
 .nrepl-port

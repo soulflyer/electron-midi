@@ -35,7 +35,7 @@
      :assert       true
      :compiler     {:output-to      ".out/app/electron-host.js"
                     :output-dir     ".tmp/app"
-                    ;;:asset-path    "js/compiled/out"
+                    ;;:asset-path    "lib/ui"
                     :pretty-print   true
                     :output-wrapper true
                     :elide-asserts  true
@@ -49,11 +49,12 @@
      :figwheel     {:on-jsload "electron-midi.core/mount-root"}
      :compiler     {:main                 electron-midi.core
                     :output-to            ".out/app/ui.js"
-                    :output-dir           ".out/lib/ui"
+                    :output-dir           ".out/app/public/lib/ui"
                     :elide-asserts        true
                     :optimizations        :none
                     :pretty-print         true
                     :output-wrapper       true
+                    :asset-path           "lib/ui"
                     :preloads             [devtools.preload
                                            day8.re-frame-10x.preload]
                     :closure-defines      {"re_frame.trace.trace_enabled_QMARK_"        true

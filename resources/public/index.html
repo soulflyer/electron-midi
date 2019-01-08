@@ -14,7 +14,8 @@
     <div id="app">
       <h1>Electron UI code not yet loaded</h1>
     </div>
-        <script src="js/compiled/app.js"></script>
-        <script>electron_midi.core.init();</script>
+    <script type="text/javascript" src="../../lib/ui/goog/base.js"></script>
+    <script type="text/javascript" src="../ui.js"></script>
+    <script type="text/javascript">goog.require('electron_midi.core.init')</script>
   </body>
 </html>
